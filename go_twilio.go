@@ -51,9 +51,13 @@ func (this *Twilio) SendMessage(to, from, smsBody string) error {
 	}
 
 	basicAuth := "Basic " + base64.StdEncoding.EncodeToString([]byte(this.AccountId+":"+this.AccountKey))
-	print(basicAuth)
 	req.Header.Add("Content-Type", "application/x-www-form-urlencoded")
 	req.Header.Add("Authorization", basicAuth)
+
+	if this.Verbose {
+		print("[TWILIO] URL:" + url)
+		print("[TWILIO] Auth:" + basicAuth)
+	}
 
 	res, err := http.DefaultClient.Do(req)
 	if err != nil {
@@ -66,8 +70,8 @@ func (this *Twilio) SendMessage(to, from, smsBody string) error {
 	}
 
 	if this.Verbose {
-		fmt.Println(res)
-		fmt.Println(string(body))
+		print("[TWILIO] RES:", res)
+		print("[TWILIO] Auth:" + string(body))
 	}
 
 	if res.StatusCode != http.StatusCreated {
