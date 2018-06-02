@@ -2,8 +2,16 @@
 Super simple twilio interface which allows you to send an SMS message
 
 
+Go get
 ```
 go get github.com/sea-erkin/go_twilio
+```
+
+Import
+```
+import (
+	twilio "github.com/sea-erkin/go_twilio"
+)
 ```
 
 Initiate client
